@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Test Application</title>
+        <!-- Load the material icons api -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- Load the google fonts api -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <!-- Load style.css with UI styling -->
+        <link rel="stylesheet" href="style.css">
+        <script>
+            const { ipcRenderer } = require('electron');
+            
+            function on()
+            {
+                ipcRenderer.send("ledOn");
+            }
+ 
+            function off()
+            {
+                ipcRenderer.send("ledOff");
+            }
+ 
+            function closebutton()
+            {
+                ipcRenderer.send("buttonClose");
+            }
+        </script>
+    </head>
+    <body>
+        <button class="closebutton" onclick="closebutton()">X</button>
+        <br>
+        <h1>SMART LAMP</h1>
+        <i class="material-icons">lightbulb</i>
+        <button class="onbutton" onclick="on()">ON</button>
+        <br>
+        <button class="offbutton" onclick="off()">OFF</button>
+    </body>
+</html>
