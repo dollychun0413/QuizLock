@@ -1,88 +1,285 @@
 /* Styling for the body of the app */
 body {
-    background-color: rgb(141, 141, 141);
+  background-color: rgb(141, 141, 141);
 }
- 
+
 /* Styling for heading of the app */
 h1 {
-    font-size: 60px;
-    text-align: center;
-    font-family: "Roboto", "Courier New", monospace;
-    color: rgb(255, 255, 255);
-    
-    margin-bottom: 25px;
-    margin-top: 25px;
+  font-size: 60px;
+  text-align: center;
+  font-family: "Roboto", "Courier New", monospace;
+  color: rgb(255, 255, 255);
 }
- 
+
 /* Styling for the light bulb */
 .material-icons{
-    font-size: 250px;
-    color: rgb(204, 202, 71);
-    display: flex;
-    justify-content: center;
+  font-size: 50px;
+  color: rgb(204, 202, 71);
+  /*display: flex;*/
+  display: inline-block;
+  justify-content: center;
+
+  vertical-align: middle;
 }
- 
+
 /* Styling for the ON button */
 .onbutton {
-    display: inline-block;
-    padding: 15px 25px;
-    font-size: 35px;
-    text-align: center;
-    outline: none;
-    color: rgb(255, 255, 255);
-    background-color:rgb(76, 175, 80);
-    border: none;
-    border-radius: 15px;
-    width: 20%;
-    margin:auto;
-    display:grid;
-  }
- 
-/* Button press effect for ON button */
-.onbutton:active {
-  box-shadow: 0 5px rgb(104, 99, 99);
-  transform: translateY(4px);
-}
- 
-/* Hover effect for ON button */
-.onbutton:hover {background-color: rgb(62, 142, 65)}
- 
-/* Styling for OFF button */
-.offbutton {
-    display: inline-block;
-    padding: 15px 25px;
-    font-size: 35px;
-    text-align: center;
-    outline: none;
-    color: rgb(255, 255, 255);
-    background-color:rgb(207, 85, 85);
-    border: none;
-    border-radius: 15px;
-    width: 20%;
-    margin:auto;
-    display:grid;
-}
- 
-/* Button press effect for OFF button */
-.offbutton:active {
-  box-shadow: 0 5px rgb(104, 99, 99);
-  transform: translateY(4px);
-}
- 
-/* Hover effect for OFF button */  
-.offbutton:hover {background-color: rgb(179, 44, 44)}
- 
-/* Styling for Close button */
-.closebutton {
-  padding: 8px 25px;
-  font-size: 20px;
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 30px;
   text-align: center;
   outline: none;
   color: rgb(255, 255, 255);
-  background-color:rgb(179, 44, 44);
+  background-color:rgb(76, 175, 80);
   border: none;
-  width: 6%;
+  border-radius: 15px;
+  width: 20%;
   margin:auto;
-  display:grid;
-  float: right;
+  /* display:grid; */
+}
+
+/* Button press effect for ON button */
+.onbutton:active {
+box-shadow: 0 5px rgb(104, 99, 99);
+transform: translateY(4px);
+}
+
+/* Hover effect for ON button */
+.onbutton:hover {background-color: rgb(62, 142, 65)}
+
+/* Styling for OFF button */
+.offbutton {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 30px;
+  text-align: center;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background-color:rgb(207, 85, 85);
+  border: none;
+  border-radius: 15px;
+  width: 20%;
+  margin:auto;
+  /* display:grid; */
+}
+
+/* Button press effect for OFF button */
+.offbutton:active {
+box-shadow: 0 5px rgb(104, 99, 99);
+transform: translateY(4px);
+}
+
+/* Hover effect for OFF button */  
+.offbutton:hover {background-color: rgb(179, 44, 44)}
+
+/* Styling for Close button */
+.closebutton {
+padding: 8px 25px;
+font-size: 20px;
+text-align: center;
+outline: none;
+color: rgb(255, 255, 255);
+background-color:rgb(179, 44, 44);
+border: none;
+width: 6%;
+margin:auto;
+display:grid;
+float: right;
+}
+
+.title{
+margin-top: 10px;
+margin-bottom: 0px;
+}
+
+.subtitle{
+margin-top: 0px;
+margin-bottom: 0px;
+text-align: center;
+}
+
+.main{
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 30px;
+}
+.left_area, .right_area{
+/*margin-left: 10px;*/
+/*margin-right: 10px;*/
+width: 360px;
+margin: 0 auto;
+}
+.right_area{
+margin-top: 10px;
+}
+
+.square{
+width: 370px;
+height: 230px;
+background: #000000;
+margin: 0 auto;
+margin-top: 20px;
+margin-bottom: 20px;
+
+color: white;	/*文字色*/
+font-size: 50px;
+display: table-cell;
+text-align: center;
+vertical-align: middle;
+}
+
+.button_area{
+text-align: right;
+}
+
+.input_area{
+text-align: center;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+.input_password_area div{
+  display: inline;
+  font-size: 30px;
+}
+.input_password_area input{
+width: 300px;
+font-size: 30px;
+}
+.input_area p{
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.tenkey_area{
+margin-top: 0px;
+margin-bottom: 20px;
+text-align: center;
+}
+.tenkey_area div{
+margin-top: 2px;
+margin-bottom: 2px;
+}
+.numbutton{
+margin: 5px;
+width: 105px;
+height: 55px;
+font-size: 25px;
+
+color: rgb(255, 255, 255);
+background-color:rgb(76, 175, 80);
+border: none;
+border-radius: 3px;
+}
+.clearbutton{
+width: 350px;
+height: 30px;
+font-size: 16px;
+margin-bottom: 5px;
+
+color: rgb(255, 255, 255);
+background-color:rgb(207, 85, 85);
+border: none;
+border-radius: 3px;
+}
+
+/* Button press effect for Clear button */
+.clearbutton:active {
+box-shadow: 0 5px rgb(104, 99, 99);
+transform: translateY(4px);
+}
+
+/* Hover effect for Clear button */  
+.clearbutton:hover {background-color: rgb(179, 44, 44)}
+
+/* Button press effect for ON button */
+.numbutton:active {
+box-shadow: 0 5px rgb(104, 99, 99);
+transform: translateY(4px);
+}
+
+/* Hover effect for ON button */
+.numbutton:hover {background-color: rgb(62, 142, 65)}
+
+
+/* モーダル画面用設定 */
+#modal-content{
+display:none;
+width:50%;
+margin:1.5em auto 0;
+padding:10px 20px;
+border:2px solid #aaa;
+background:#fff;
+z-index:2;
+position:fixed;
+
+text-align:center;
+}
+
+.modal-p{
+margin-top:1em;
+}
+
+.modal-p:first-child{
+margin-top:0;
+}
+
+.button-link{
+color:#00f;
+text-decoration:underline;
+}
+
+.button-link:hover{
+cursor:pointer;
+color:#f00;
+}
+
+#modal-overlay{
+z-index:1;
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:120%;
+background-color:rgba(0,0,0,0.75);
+}
+
+#modal_image{
+width: 100px;
+}
+
+/* Styling for the F button */
+.fbutton {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 30px;
+  text-align: center;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+  width: 20%;
+  margin:auto;
+  /* display:grid; */
+}
+
+/* Button press effect for F button */
+.fbutton:active {
+box-shadow: 0 5px rgb(104, 99, 99);
+transform: translateY(4px);
+}
+
+/* Hover effect for F button */
+.fbutton:hover {background-color: rgb(62, 142, 65)}
+
+/* Styling for the F1, F2 button */
+.f1button, .f2button {
+  color: rgb(255, 255, 255);
+  background-color:rgb(128, 128, 128);
+}
+
+/* Styling for the F3 button */
+.f3button {
+  color: rgb(255, 255, 255);
+  background-color:rgb(76, 175, 80);
 }

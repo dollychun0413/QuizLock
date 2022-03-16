@@ -1,24 +1,32 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const GPIO = require('onoff').Gpio;
 
-const PIN_LED = 17;
-const LED = new GPIO(PIN_LED, 'out');
+const PIN_SOLENOID = 17;
+const SOLENOID = new GPIO(PIN_SOLENOID, 'out');
 const DEBUG_DISABLE_FULLSCREEN = false;
 const DEBUG_LOG_IPC_MESSAGES = true;
 
-ipcMain.on('ledOn', () => {
-    if (DEBUG_LOG_IPC_MESSAGES) console.log('ledOn');
-    LED.writeSync(1);
+ipcMain.on('moveSolenoid', () => {
+    if (DEBUG_LOG_IPC_MESSAGES) console.log('moveSolenoid on');
+    // ソレノイド駆動
+    SOLENOID.writeSync(1);
+
+    // 3秒後に停止
+    setTimeout(function() {
+        if (DEBUG_LOG_IPC_MESSAGES) console.log('moveSolenoid off');
+        SOLENOID.writeSync(0);
+    }, 5000);
 });
 
 ipcMain.on("ledOff",() => {
     if (DEBUG_LOG_IPC_MESSAGES) console.log("ledOff");
-    LED.writeSync(0);
+    SOLENOID.writeSync(0);
 });
 
 ipcMain.on("buttonClose", () => {
     if (DEBUG_LOG_IPC_MESSAGES) console.log("buttonClose");
-    LED.unexport();
+    SOLENOID.writeSync(0);
+    SOLENOID.unexport();
     app.quit();
 });
 

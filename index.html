@@ -9,32 +9,178 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
         <!-- Load style.css with UI styling -->
         <link rel="stylesheet" href="style.css">
+		<!-- require('./kawaii/memetan.js') -->
+    	<script src="./buzzerControl.js"></script>
         <script>
             const { ipcRenderer } = require('electron');
-            
-            function on()
+            window.jQuery = window.$ = require('./lib/jquery-3.6.0.min.js');  
+
+            function moveSolenoid()
             {
-                ipcRenderer.send("ledOn");
+				okBuzzer(2);
+                ipcRenderer.send("moveSolenoid");
             }
- 
-            function off()
-            {
-                ipcRenderer.send("ledOff");
-            }
- 
+
             function closebutton()
             {
                 ipcRenderer.send("buttonClose");
             }
+            
+            function inputnum(num){
+            	var input1 = document.getElementById("inputnum");
+            	input1.value = input1.value + num ;
+            }
+            
+            function numclear(){
+            	var input1 = document.getElementById("inputnum");
+            	input1.value = "";
+            }
+            
+			// ヒント
+            function hint1(){
+            	$("#square").text('BLACK');
+            }
+            function hint2(){
+            	$("#square").text('BLACK');
+            	$("#inputhint").text('#');
+            }
+
+            // OKボタンクリック時処理
+            function ok(){
+            	var input1 = document.getElementById("inputnum");
+				
+            	if (input1.value != "000000"){
+					//キーボード操作などにより、オーバーレイが多重起動するのを防止する
+					//$(this).blur();	//ボタンからフォーカスを外す
+					if($("#modal-overlay")[0]) return false ;		//新しくモーダルウィンドウを起動しない [下とどちらか選択]
+					//if($("#modal-overlay")[0]) $("#modal-overlay").remove() ;		//現在のモーダルウィンドウを削除して新しく起動する [上とどちらか選択]
+
+					//オーバーレイ用のHTMLコードを、[body]内の最後に生成する
+					$("body").append('<div id="modal-overlay"></div>');
+					$("#modal-content")[0].style.display="block";
+
+					//センタリング
+					centeringModalSyncer();
+
+					ngBuzzer(0.1);
+
+					//[$modal-overlay]をフェードインさせる
+					$("#modal-overlay").fadeIn("slow");
+					
+					// モーダル画面を消すときの処理を記述しておく
+					$("#modal-overlay,#modal-close").unbind().click(function(){
+						//[#modal-overlay]、または[#modal-close]をクリックしたら起こる処理
+						//[#modal-overlay]と[#modal-close]をフェードアウトする
+						$("#modal-content,#modal-overlay").fadeOut("slow",function(){
+							//フェードアウト後、[#modal-overlay]をHTML(DOM)上から削除
+							$("#modal-overlay").remove();
+						});
+					});
+					
+					input1.value = "";
+				}else{
+					// alert("おめでとう");
+					moveSolenoid();
+				}
+            }
+
+			//センタリングを実行する関数
+			function centeringModalSyncer() {
+
+				//画面(ウィンドウ)の幅、高さを取得
+				var w = $( window ).width() ;
+				var h = $( window ).height() ;
+
+				// コンテンツ(#modal-content)の幅、高さを取得
+				// jQueryのバージョンによっては、引数[{margin:true}]を指定した時、不具合を起こします。
+		//		var cw = $( "#modal-content" ).outerWidth( {margin:true} );
+		//		var ch = $( "#modal-content" ).outerHeight( {margin:true} );
+				var cw = $( "#modal-content" ).outerWidth();
+				var ch = $( "#modal-content" ).outerHeight();
+
+				//センタリングを実行する
+				$( "#modal-content" ).css( {"left": ((w - cw)/2) + "px","top": ((h - ch)/2) + "px"} ) ;
+
+			}
+			
+			$(document).keydown(function(e) { 
+				switch (e.keyCode) {
+					case 65:
+						// Key: A
+						$("#f1hintbutton").click();
+						break;
+					case 83:
+						// Key: S
+						$("#f2hintbutton").click();
+						break;
+					case 68:
+					case 70:
+						// Key: D
+						// Key: F
+						$("#f3okbutton").click();
+						break;
+				}
+			});
         </script>
     </head>
     <body>
         <button class="closebutton" onclick="closebutton()">X</button>
-        <br>
-        <h1>SMART LAMP</h1>
-        <i class="material-icons">lightbulb</i>
-        <button class="onbutton" onclick="on()">ON</button>
-        <br>
-        <button class="offbutton" onclick="off()">OFF</button>
+        
+        <h1 class="title">脱出セヨ</h1>
+        <p class="subtitle">~ The escape at house ~</p>
+        
+        <div class="main">
+	        <div class="left_area">
+	            <div id="square" class="square"></div>
+
+				<div class="input_area">
+					<p>▼ Input password</p>
+					<div class="input_password_area">
+						<div id="inputhint">　</div>
+						<input type="text" id="inputnum">
+					</div>
+				</div>
+	        </div>
+
+	        <div class="right_area">
+			    <div class="tenkey_area">
+		    	    <div>
+				        <button class="clearbutton" onclick="numclear()">clear</button>
+			        </div>
+			    	<div>
+		    		    <button class="numbutton" onclick="inputnum('7')">7</button>
+		    		    <button class="numbutton" onclick="inputnum('8')">8</button>
+		    		    <button class="numbutton" onclick="inputnum('9')">9</button>
+		    		</div>
+				    <div>
+				        <button class="numbutton" onclick="inputnum('4')">4</button>
+		    		    <button class="numbutton" onclick="inputnum('5')">5</button>
+		    		    <button class="numbutton" onclick="inputnum('6')">6</button>
+		    	    </div>
+		    		<div>
+		    		    <button class="numbutton" onclick="inputnum('1')">1</button>
+		    		    <button class="numbutton" onclick="inputnum('2')">2</button>
+		    		    <button class="numbutton" onclick="inputnum('3')">3</button>
+		    	    </div>
+		    	    <div>
+				        <button class="numbutton" onclick="inputnum('0')">0</button>
+			        </div>
+	            </div>
+	        </div>
+        </div>
+        
+        <div class="button_area">
+            <!-- <button id="okbutton" class="onbutton" onclick="ok()" accesskey="f">OK</button>
+            <i class="material-icons" onclick="hint()">lightbulb</i> -->
+            <button id="f1hintbutton" class="fbutton f1button" onclick="hint1()">HINT(↓F1)</button>
+            <button id="f2hintbutton" class="fbutton f2button" onclick="hint2()">HINT(↓F2)</button>
+            <button id="f3okbutton" class="fbutton f3button" onclick="ok()">OK(↓F3/○)</button>
+        </div>
+
+        <div id="modal-content">
+        	<img id="modal_image" src="Skull.png">
+			<p>パスワードが違っておる</p>
+			<p><a id="modal-close" class="button-link">閉じる</a></p>
+		</div>
     </body>
 </html>
