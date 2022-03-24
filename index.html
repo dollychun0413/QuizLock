@@ -11,12 +11,16 @@
         <link rel="stylesheet" href="style.css">
 		<!-- require('./kawaii/memetan.js') -->
     	<script src="./buzzerControl.js"></script>
+    	<script src="./ledControl.js"></script>
         <script>
             const { ipcRenderer } = require('electron');
             window.jQuery = window.$ = require('./lib/jquery-3.6.0.min.js');  
 
             function moveSolenoid()
             {
+				// 緑LEDを点灯・消灯
+				staGreenLed(10);
+				// ブザーを鳴らしてとめる
 				okBuzzer(2);
                 ipcRenderer.send("moveSolenoid");
             }
@@ -63,6 +67,8 @@
 					centeringModalSyncer();
 
 					ngBuzzer(0.1);
+					// 赤LEDを点灯・消灯
+					staRedLed(2);
 
 					//[$modal-overlay]をフェードインさせる
 					$("#modal-overlay").fadeIn("slow");
