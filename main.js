@@ -11,11 +11,11 @@ ipcMain.on('moveSolenoid', () => {
     // ソレノイド駆動
     SOLENOID.writeSync(1);
 
-    // 3秒後に停止
+    // 10秒後に停止
     setTimeout(function() {
         if (DEBUG_LOG_IPC_MESSAGES) console.log('moveSolenoid off');
         SOLENOID.writeSync(0);
-    }, 5000);
+    }, 10000);
 });
 
 ipcMain.on("ledOff",() => {
